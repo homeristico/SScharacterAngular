@@ -22,6 +22,11 @@ export class BodyComponent implements OnInit {
     informacion:"",
     imagen:""
   };
+  saintTipo:any = ["Bronce","Plata","Oro","Sonota"];
+  opcion:string = "";
+  imagenes:any;
+  contadorCarrusel:number;
+
   constructor(private carga:CargaInicialService){    
     this.cargaInicial();
   }
@@ -39,21 +44,24 @@ export class BodyComponent implements OnInit {
   }
 
   show(id){
-    
+    this.contadorCarrusel=0;
     this.carga.showServicio(id).subscribe( resultado => {
       console.log(resultado);      
-      this.datosSaint.nombre = resultado.nombre;
-      this.datosSaint.constelacion = resultado.constelacion;
-      this.datosSaint.pais = resultado.pais;
-      this.datosSaint.edad = resultado.edad;
-      this.datosSaint.serie = resultado.serie;
-      this.datosSaint.clase = resultado.clase;
-      this.datosSaint.informacion = resultado.informacion;
-      this.datosSaint.imagen = resultado.imagen;
+      this.datosSaint.nombre = resultado.saint.nombre;
+      this.datosSaint.constelacion = resultado.saint.constelacion;
+      this.datosSaint.pais = resultado.saint.pais;
+      this.datosSaint.edad = resultado.saint.edad;
+      this.datosSaint.serie = resultado.saint.serie;
+      this.datosSaint.clase = resultado.saint.clase;
+      this.datosSaint.informacion = resultado.saint.informacion;
+      this.datosSaint.imagen = resultado.saint.imagen;
+
+      this.imagenes = resultado.imagenes;
+      console.log(this.imagenes)
     },
     error => {
       console.log(error);
-    });
+    });    
   } 
 
   limpiarModal(){    
@@ -67,6 +75,12 @@ export class BodyComponent implements OnInit {
       informacion:"",
       imagen:""
     };
+    this.imagenes = [];
+  }
+
+  changTipo($event){
+    console.log($event.target.value)
+    this.opcion = $event.target.value;
   }
   
 
