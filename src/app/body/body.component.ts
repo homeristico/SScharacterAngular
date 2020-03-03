@@ -22,13 +22,14 @@ export class BodyComponent implements OnInit {
     informacion:"",
     imagen:""
   };
-  saintTipo:any = ["Bronce","Plata","Oro","Sonota"];
+  saintTipo:any;
   opcion:string = "";
   imagenes:any;
   contadorCarrusel:number;
 
   constructor(private carga:CargaInicialService){    
     this.cargaInicial();
+    this.cargarClase();
   }
 
   ngOnInit() {
@@ -81,6 +82,12 @@ export class BodyComponent implements OnInit {
   changTipo($event){
     console.log($event.target.value)
     this.opcion = $event.target.value;
+  }
+
+  cargarClase(){
+    this.carga.cargarClaseServicio().subscribe(resultado => {
+      this.saintTipo = resultado;
+    });
   }
   
 

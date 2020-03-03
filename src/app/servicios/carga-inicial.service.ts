@@ -23,4 +23,8 @@ export class CargaInicialService {
     return this.http.get(`http://localhost:8000/api/saintangu/${id}`);
   }
 
+  cargarClaseServicio():Observable<any>{
+    return this.http.get('http://localhost:8000/clase');
+  }
+
 }
